@@ -50,6 +50,7 @@
           <li
             class="list-group-item d-flex justify-content-between align-items-center"
           >
+          <!-- Update Task-->
           <form method="POST" action="update_task.php">
             <input
             type="hidden"
@@ -61,22 +62,20 @@
             name="todo_id"
             value="<?= $todo["id"]; ?>"
             />
-            <?php if ($todo["completed"] == 0):?>
-              <div>            
+            <?php if ($todo["completed"] == 0):?>                        
               <button class="btn btn-sm btn-light">
                 <i class="bi bi-square"></i>
               </button>
-              
+              <span><?= $todo['label'];?></span>              
               <?php else : ?>              
               <button class="btn btn-sm btn-success">
                 <i class="bi bi-check-square"></i>
               </button>
+              <span class="ms-2 text-decoration-line-through"><?= $todo['label'];?></span>
               <?php endif; ?>
-              <span class="ms-2 text-decoration-line-through">Task 1</span>
-            </div>
-          </form>  
-          
-            <!-- delete task -->            
+           </form>
+
+            <!-- Delete Task -->            
             <form method="POST" action="delete_task.php">              
                 <input 
                   type="hidden"
