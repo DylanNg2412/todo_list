@@ -1,4 +1,7 @@
 <?php
+
+ session_start();  
+
  $host = 'devkinsta_db';
    $database_name = 'My_ToDo_List';
    $database_user = 'root';
@@ -45,6 +48,11 @@
     >
       <div class="card-body">
         <h3 class="card-title mb-3">My Todo List</h3>
+        <?php if ( isset( $_SESSION["user"] ) ) : ?>
+          <div class="d-flex gap-2 ">
+          <span>User : <?= $_SESSION["user"]["name"]; ?></span>
+          <a href="logout.php" class="btn btn-link p-0" id="login">Logout</a>
+        </div>
         <ul class="list-group">
           <?php foreach ( $todos as $todo): ?>
           <li
@@ -89,6 +97,14 @@
           </li>
           <?php endforeach; ?>
         </ul>
+        <?php else : ?>
+          <div class="d-flex justify-content-center">
+            <a href="login.php" class="btn btn-link" id="login">Login</a>
+            <a href="signup.php" class="btn btn-link" id="signup">Sign Up</a>
+          </div>
+        <?php endif; ?>
+
+        <?php if ( isset( $_SESSION["user"] ) ) : ?>
         <div class="mt-4">
           <form method="POST" action="add_tasks.php" class="d-flex justify-content-between align-items-center">
             <input
@@ -100,6 +116,7 @@
             <button class="btn btn-primary btn-sm rounded ms-2">Add</button>
           </form>
         </div>
+        <?php endif; ?>
       </div>
     </div>
 
