@@ -13,11 +13,11 @@ $database = new PDO(
     $database_password
 );
 
-// step 3: get student id and updated name from $_POST
+// step 3: get task id and completed is 0/1 from $_POST
 $todo_id = $_POST['todo_id'];
 $todo_completed = $_POST["todo_completed"];
 
-// do error checking. Check if student name is empty or not
+// do error checking. Check if task is completed or not 
 if ($todo_completed == 0) {
     $sql = "UPDATE todos SET completed = 1 WHERE id = :id";
 } else if ($todo_completed == 1) {
