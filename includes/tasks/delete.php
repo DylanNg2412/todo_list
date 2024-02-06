@@ -1,17 +1,7 @@
 <?php
 
    // step 1: list out all the database info
-   $host = 'devkinsta_db';
-   $database_name = 'My_ToDo_List';
-   $database_user = 'root';
-   $database_password = 'sU3R6Rm2wtOI8xQA';
-
-   // Step 2: connect to the database
-   $database = new PDO(
-    "mysql:host=$host;dbname=$database_name",
-    $database_user,
-    $database_password
-  );
+   $database = connectToDB();
 
   // step 3: get student ID from the $_POST
   $todo_label = $_POST["todo_label"];
@@ -26,6 +16,6 @@
         'label' => $todo_label
     ]);
 
-  // Step 5: redirect back to index.php
-  header("Location: index.php");
+  // Step 5: redirect back to home.php
+  header("Location: home.php");
   exit;

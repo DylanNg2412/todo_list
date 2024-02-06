@@ -1,17 +1,7 @@
 <?php
 
 // step 1: list out all the database info
-$host = 'devkinsta_db';
-$database_name = 'My_ToDo_List';
-$database_user = 'root';
-$database_password = 'sU3R6Rm2wtOI8xQA';
-
-// Step 2: connect to the database
-$database = new PDO(
-    "mysql:host=$host;dbname=$database_name",
-    $database_user,
-    $database_password
-);
+$database = connectToDB();
 
 // step 3: get task id and completed is 0/1 from $_POST
 $todo_id = $_POST['todo_id'];
@@ -30,5 +20,5 @@ $query->execute([
     'id' => $todo_id,
 ]);
 
-header("Location: index.php");
+header("Location: home.php");
 exit;

@@ -1,47 +1,18 @@
 <?php
 
 
-
- $host = 'devkinsta_db';
-   $database_name = 'My_ToDo_List';
-   $database_user = 'root';
- $database_password = 'sU3R6Rm2wtOI8xQA';
-
- $database = new PDO(
-    "mysql:host=$host;dbname=$database_name",
-    "$database_user",
-    "$database_password"
- );
-
- $sql = "SELECT * FROM todos";
+$database = connectToDB();
+ 
+ $sql = "SELECT * FROM todos WHERE user_id = :user_id";
    $query = $database->prepare($sql);
-   $query->execute();
+   $query->execute([
+    'user_id' => isset( $_SESSION["user"]['id'] ) ? $_SESSION["user"]['id'] : ''
+  ]);
    $todos = $query -> fetchAll();
 
 ?>
 
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>TODO App</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
-    />
-    <style type="text/css">
-      body {
-        background: #f1f1f1;
-      }
-    </style>
-  </head>
-  <body>
+<?php require "parts/header.php"; ?>
     <div
       class="card rounded shadow-sm"
       style="max-width: 500px; margin: 60px auto;"
@@ -56,7 +27,7 @@
             class="list-group-item d-flex justify-content-between align-items-center"
           >
           <!-- Update Task-->
-          <form method="POST" action="update_task.php">
+          <form method="POST" action="/tasks/update">
             <input
             type="hidden"
             name="todo_completed"
@@ -81,7 +52,7 @@
            </form>
 
             <!-- Delete Task -->            
-            <form method="POST" action="delete_task.php">              
+            <form method="POST" action="/tasks/delete">              
                 <input 
                   type="hidden"
                   name="todo_label"
@@ -99,7 +70,7 @@
 
         <?php if ( isset( $_SESSION["user"] ) ) : ?>
         <div class="mt-4">
-          <form method="POST" action="add_tasks.php" class="d-flex justify-content-between ">
+          <form method="POST" action="/tasks/add" class="d-flex justify-content-between ">
             <input
               type="text"
               class="form-control"
@@ -124,6 +95,4 @@
     </div>
     <?php endif; ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-</html>
+<?php require "parts/footer.php"; ?>

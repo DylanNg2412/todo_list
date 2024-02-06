@@ -1,20 +1,6 @@
 <?php
  //Start Session
- session_start();
- 
- // Step 1: list out all tje database info
- $host = 'devkinsta_db';
- $database_name = 'My_ToDo_List';
- $database_user = 'root';
- $database_password = 'sU3R6Rm2wtOI8xQA';
-
- 
- // Step 2: Connect to the database to PHP
- $database = new PDO(
-    "mysql:host=$host;dbname=$database_name",
-    "$database_user",
-    "$database_password"
- );
+ $database = connectToDB();
 
  // Step 3: get all the data from the form using $_POST
  $email = $_POST["email"];
@@ -22,7 +8,7 @@
 
  // Step 4: error checking
  if ( empty( $email ) || empty( $password ) ) {
-      echo "All the fields are required.";
+      setError("All the fields are required.", "/login");
  } else {
   // Step 5: login the user
    // 5.1 - retrieve the user data from your users table using the email provided by the user
@@ -39,7 +25,7 @@
     
     // 5.2 - make sure the $user is not empty
     if ( empty( $user ) ) {
-        echo "The email provided does not exists";
+        setError ("The email provided does not exists" , "/login");
       } else {
         // 5.3 - make sure the password is correct
         if ( password_verify( $password, $user["password"] ) ) {
@@ -47,7 +33,7 @@
           $_SESSION["user"] = $user;
 
           // Step 6: redirect back to index.php
-          header("Location: index.php");
+          header("Location: /");
           exit;
         } else {
           echo "The password provided is incorrect";
