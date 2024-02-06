@@ -20,7 +20,7 @@ $database = connectToDB();
       <div class="card-body">
         <h3 class="card-title mb-3">My Todo List</h3>
         <?php if ( isset( $_SESSION["user"] ) ) : ?>
-          
+        <?php require "parts/error_box.php"; ?>  
         <ul class="list-group">
           <?php foreach ( $todos as $todo): ?>
           <li

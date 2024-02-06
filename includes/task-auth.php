@@ -5,7 +5,7 @@ class Authentication
     function login()
     {
 
-        $database = connectToBD();
+        $database = connectToDB();
 
         // Step 3: get all the data from the form using $_POST
         $email = $_POST["email"];
@@ -13,7 +13,7 @@ class Authentication
 
         // Step 4: error checking
         if ( empty( $email ) || empty( $password ) ) {
-            echo "All the fields are required.";
+            setError("All the fields are required.", "/login");
         } else {
         // Step 5: login the user
         // 5.1 - retrieve the user data from your users table using the email provided by the user

@@ -5,7 +5,7 @@
 
     // do error checking and check if $todo_label is empty or not
     if ( empty( $todo_label ) ) {
-      echo 'Please enter a task';
+      setError ("Please enter a task", "/");
     } else {
 
       $sql = 'INSERT INTO todos (`label`,`user_id`) VALUES (:label,:user_id)';
@@ -17,7 +17,7 @@
           'user_id' => $_SESSION["user"]['id']
       ]);
 
-   header("Location: home.php");
+   header("Location: /");
    exit;
   }
 
