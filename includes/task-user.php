@@ -73,7 +73,7 @@ class User
             'id' => $todo_id,
         ]);
 
-        header("Location: home.php");
+        header("Location: /");
         exit;
 
     }
