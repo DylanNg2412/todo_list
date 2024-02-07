@@ -55,8 +55,8 @@ $database = connectToDB();
             <form method="POST" action="/tasks/delete">              
                 <input 
                   type="hidden"
-                  name="todo_label"
-                  value="<?= $todo["label"]; ?>" 
+                  name="todo_id"
+                  value="<?= $todo["id"]; ?>" 
                   />           
               <button class="btn btn-sm btn-danger">
                 <i class="bi bi-trash"></i>

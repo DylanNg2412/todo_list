@@ -4,16 +4,16 @@
    $database = connectToDB();
 
   // step 3: get student ID from the $_POST
-  $todo_label = $_POST["todo_label"];
+  $todo_id = $_POST["todo_id"];
 
   // step 4: delete the student from the database using student ID
     // 4.1 - sql command (recipe)
-    $sql = "DELETE FROM todos where label = :label";
+    $sql = "DELETE FROM todos where id = :id";
     // 4.2 - prepare (put everything into the bowl)
     $query = $database->prepare($sql);
     // 4.3 - execute (cook it)
     $query->execute([
-        'label' => $todo_label
+        'id' => $todo_id
     ]);
 
   // Step 5: redirect back to home.php

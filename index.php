@@ -7,6 +7,7 @@
   require "includes/functions.php";
   require "includes/task-auth.php";
   require "includes/task-user.php";
+  require "includes/class-db.php";
 
 
   $path = $_SERVER["REQUEST_URI"];
@@ -15,7 +16,7 @@
 
   // init classes
   $auth = new Authentication();
-  $task = new User();
+  $task = new Task();
 
   // simple router system - deciding what page to load based on the url
   // Routes
